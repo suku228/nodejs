@@ -5,9 +5,14 @@ const request = require('request');
 
 const app = express();
 
+require('dotenv').config();
+// Access variables via process.env
+console.log(process.env.PORT); 
+console.log(process.env.JSONURL); 
+
 
 // GET all posts
-request( {url: 'https://jsonplaceholder.typicode.com/users', json: true }, (err, _, body) => {
+request( {url: process.env.JSONURL + '/users', json: true }, (err, _, body) => {
   if (err) return console.error(err);
   console.log(body[0].name,'--jj->',); // array of posts
 });
@@ -17,7 +22,7 @@ request( {url: 'https://jsonplaceholder.typicode.com/users', json: true }, (err,
 const viewsPath = path.join(__dirname, './templates/views');
 const partialspath = path.join(__dirname, './templates/partials');
 const publicDirectoryPath = path.join(__dirname, './public');
-console.log("--->",publicDirectoryPath);
+
 
 app.use(express.static(publicDirectoryPath));
 app.set('view engine', 'hbs');
@@ -50,7 +55,15 @@ app.get('/about', (req, res) => {
     });
 });
 
+app.get('/api/details', (req, res) => {
+  res.send({
+    name: 'Sueksh gampa',
+    age: 28,
+    city: 'Kathmandu'
+  })
+});
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+
+app.listen(process.env.PORT, () => {
+  console.log('Server is running on port -->' + process.env.PORT);
 });
