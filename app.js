@@ -10,8 +10,7 @@ const app = express();
 
 const allowedOrigins = [
   'http://localhost:3000',
-  'https://jsonplaceholder.typicode.com',
-  'https://nodejs-neid.onrender.com'
+  'https://react-chk6dv9a.stackblitz.io'
 ];
 
 app.use(cors({
