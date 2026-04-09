@@ -26,6 +26,12 @@ weatherForm.addEventListener('submit', (e) => {
     fetch('https://jsonplaceholder.typicode.com/users/' + location).then((response) => {
         return response.json()
     }).then((data) => {
+
+        fetch('https://nodejs-neid.onrender.com/api/details').then((response) => {
+        return response.json();
+    }).then((data) => {
+        console.log(data);
+    });
         loader.textContent = '';
         name.textContent = data.name;
         username.textContent = data.username;
